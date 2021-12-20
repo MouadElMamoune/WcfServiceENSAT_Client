@@ -1,0 +1,60 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model ServiceReferenceENSAT.Student
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@if (SignInManager.IsSignedIn(User)) {<meta http-equiv="refresh" content="0; /Students"/>}
+    <div class="text-center">
+        <form asp-controller="Home" asp-action="Index">
+            <p class="my-5">
+                <input style="text-align:center" placeholder="@Html.DisplayNameFor(model => model.ID)" type="text" name="searchText" />
+                <input type="submit" value="Search" />
+            </p>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ID)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FNAME)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LNAME)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MAIL)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PHONE)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(model => model.ID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.FNAME)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.LNAME)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.MAIL)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.PHONE)
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>

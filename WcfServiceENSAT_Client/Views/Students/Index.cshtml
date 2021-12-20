@@ -1,0 +1,83 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@model IEnumerable<ServiceReferenceENSAT.Student>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@if (SignInManager.IsSignedIn(User))
+{
+
+    <h1>Index</h1>
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <form asp-controller="Students" asp-action="Index">
+        <p>
+            <input style="text-align:center" placeholder="@Html.DisplayNameFor(model => model.ID)" type="text" name="searchText" />
+            <input type="submit" value="Search" />
+        </p>
+    </form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FNAME)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LNAME)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MAIL)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PHONE)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FNAME)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LNAME)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MAIL)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PHONE)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+    </li>
+}
